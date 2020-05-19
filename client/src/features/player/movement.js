@@ -2,28 +2,7 @@ import store from '../../config/store';
 import { SPRITE_SIZE, MAP_HEIGHT } from '../../config/constants';
 
 export function handleMovement(player) {
-
-    const handleKeyDown = ev => {
-        ev.preventDefault();
-        const { key } = ev;
-        switch (key) {
-          case 'ArrowUp':
-              dispatchMove('NORTH');
-              break;
-          case 'ArrowDown':
-              dispatchMove('SOUTH');
-              break;
-          default:
-              console.log(key);
-       }
-    };
-
-    window.addEventListener('keydown', ev => {
-        handleKeyDown(ev);
-    });
-
     return player;
-
 };
 
 function getNewPosition(direction) {

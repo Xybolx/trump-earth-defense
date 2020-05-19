@@ -21,7 +21,7 @@ app.use(express.static("client/src/imgs"));
 mongoose
   .connect(
     process.env.MONGODB_URI ||
-    'mongodb://mongo:27017/trump',
+    'mongodb://localhost/trump',
     { useNewUrlParser: true })
       .then(() => console.log('MongoDB Connected'))
       .catch(err => console.log(err));

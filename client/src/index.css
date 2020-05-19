@@ -1,8 +1,7 @@
+@import url('https://fonts.googleapis.com/css?family=Press+Start+2P&display=swap');
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  font-family: 'Press Start 2P', cursive;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -10,4 +9,196 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+
+@keyframes Rotate {
+    from {
+        transform: rotateZ(0deg);
+    }
+    to {
+        transform: rotateZ(360deg);
+    }
+}
+
+@keyframes BorderTick {
+  from {
+      border-style: solid;
+  }
+  to {
+      border-style: double;
+  }
+}
+
+@keyframes EnemyTick {
+  from {
+      bottom: 50%;
+  }
+  to {
+      top: 50%;
+  }
+}
+
+@keyframes Slide {
+  from {
+      transform: translateX(0%); 
+  }
+  to {
+      transform: translateX(100%);
+  }
+}
+
+@keyframes Grow {
+  from {
+      transform: scale(0); 
+  }
+  to {
+      transform: scale(1);
+  }
+}
+
+/* The typing effect */
+@keyframes Typing {
+  from { width: 0 }
+  to { width: 100% }
+}
+
+/* The typewriter cursor effect */
+@keyframes Blink-Caret {
+  from, to { border-color: transparent }
+  50% { border-color: tomato; }
+}
+
+@keyframes HoverFlash {
+  from {
+      color: tomato;
+  }
+  to {
+    color: whitesmoke;
+  }
+}
+
+#root {
+    color: whitesmoke;
+    text-shadow: .5px .5px .5px tomato;
+}
+
+.earth {
+    animation: Rotate infinite 500s,
+               BorderTick infinite alternate 1s;
+}
+
+.player {
+  border-radius: 50%;
+  background-position: center;
+}
+
+.alert {
+  margin: 20px 20px 20px 20px;
+  animation: Grow 1s;
+}
+
+.enemy {
+  left: 1200px;
+  top: 0px;
+}
+
+.special {
+  animation: Slide .5s;
+}
+
+.alert-body {
+  left: 75px;
+  overflow: hidden;
+  white-space: nowrap; /* Keeps the content on a single line */
+  margin: 0 auto; /* Gives that scrolling effect as the typing happens */
+  letter-spacing: .15em; /* Adjust as needed */
+  animation: Typing 2s steps(35, end);
+}
+
+.alert-img {
+  animation: Grow 1s;
+}
+
+h2 {
+  color: yellow;
+  text-shadow: .5px .5px .5px .5px dodgerblue;
+  animation: Grow 1s;
+}
+
+h5 {
+  color: whitesmoke;
+  text-shadow: .5px .5px .5px .5px dodgerblue;
+  animation: Grow 2s;
+}
+
+tr {
+  color: yellow;
+}
+
+/* .modal-footer {
+  background: url('./imgs/case.png');
+  background-size: contain; */
+
+
+.modal-content {
+  background: url('./imgs/case.png'), rgba(0, 0, 0, 0.753);
+  background-blend-mode: color-burn;
+  background-size: contain;
+  background-repeat: repeat-y;
+}
+
+.modal-title {
+  color: yellow;
+}
+
+.btn-link:hover {
+  animation: HoverFlash infinite .45s;
+  text-decoration: none;
+}
+
+.btn.btn-link {
+  color: yellow;
+  text-decoration: transparent;
+}
+
+.button-wrapper {
+  text-decoration: transparent;
+  animation: Grow 2.5s;
+  display: block;
+}
+
+progress {
+  -ms-progress-appearance: none;
+  appearance: none;
+}
+
+.title-image {
+  animation: Grow 1.5s;
+}
+
+.btn-dark {
+  background: transparent;
+  background-size: contain;
+  background-position-x: left;
+  background-repeat: no-repeat;
+  padding-right: 65px;
+  border: unset;
+  color: rgb(30, 176, 255);
+  text-shadow: .5px .5px .5px whitesmoke;
+}
+
+.btn-dark:hover {
+  background: url('./features/world/lightning3.gif');
+  background-size: contain;
+  background-position-x: left;
+  background-repeat: no-repeat;
+  border: unset;
+  animation: HoverFlash infinite .45s;
+  text-shadow: .5px .5px .5px whitesmoke;
+}
+
+#initials {
+  background: transparent;
+  color: yellow;
 }

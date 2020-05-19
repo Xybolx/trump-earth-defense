@@ -55,6 +55,10 @@ const Laser = forwardRef((props, laser) => {
         switch(key) {
             case ' ':
                 return handleLaserFire();
+            case 'ArrowUp':
+                return dispatchMove && dispatchMove('NORTH');
+            case 'ArrowDown':
+                return dispatchMove && dispatchMove('SOUTH');
             default:
                 console.log(key);
         }

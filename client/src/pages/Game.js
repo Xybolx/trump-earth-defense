@@ -9,7 +9,7 @@ const Game = () => {
 
     return (
         <>
-            { gameOver ? <GameOver /> : <World /> }
+            { !gameOver ? <GameOver /> : <World /> }
         </>
     );
 };

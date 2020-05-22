@@ -69,11 +69,14 @@ code {
   50% { border-color: tomato; }
 }
 
-@keyframes HoverFlash {
-  from {
+@keyframes Flash {
+  25% {
       color: tomato;
   }
-  to {
+  50% {
+    color: dodgerblue;
+}
+  100% {
     color: whitesmoke;
   }
 }
@@ -109,11 +112,13 @@ code {
 
 .alert-body {
   left: 75px;
+  color: whitesmoke;
   overflow: hidden;
   white-space: nowrap; /* Keeps the content on a single line */
   margin: 0 auto; /* Gives that scrolling effect as the typing happens */
   letter-spacing: .15em; /* Adjust as needed */
-  animation: Typing 2s steps(35, end);
+  animation: Flash .75s infinite,
+             Typing 2s steps(35, end);
 }
 
 .alert-img {
@@ -136,24 +141,24 @@ tr {
   color: yellow;
 }
 
-/* .modal-footer {
-  background: url('./imgs/case.png');
-  background-size: contain; */
-
+.modal-footer {
+  background:rgba(0, 0, 0, 0.219);
+}
 
 .modal-content {
-  background: url('./imgs/case.png'), rgba(0, 0, 0, 0.753);
+  background: url('./imgs/news.jpg'), rgba(0, 0, 0, 0.61);
   background-blend-mode: color-burn;
   background-size: contain;
   background-repeat: repeat-y;
 }
 
-.modal-title {
-  color: yellow;
+.modal-body {
+  max-height: 450px;
+  overflow: scroll;
 }
 
 .btn-link:hover {
-  animation: HoverFlash infinite .45s;
+  animation: Flash infinite .45s;
   text-decoration: none;
 }
 
@@ -174,7 +179,7 @@ progress {
 }
 
 .title-image {
-  animation: Grow 1.5s;
+  animation: Grow .25s;
 }
 
 .btn-dark {
@@ -194,11 +199,16 @@ progress {
   background-position-x: left;
   background-repeat: no-repeat;
   border: unset;
-  animation: HoverFlash infinite .45s;
+  animation: Flash infinite .45s;
   text-shadow: .5px .5px .5px whitesmoke;
 }
 
 #initials {
   background: transparent;
   color: yellow;
+}
+
+.score-table-head {
+  text-decoration-line: underline;
+  text-decoration-color: tomato;
 }

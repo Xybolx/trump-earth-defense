@@ -1,9 +1,14 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import Gamepad from '../features/gamepad/Gamepad';
 import GamepadConnected from '../features/gamepad/GamepadConnected';
+import PausedContext from '../context/paused/PausedContext';
 
-const useGamepad = (handleLaserFire, dispatchMove) => {
+const useGamepad = (handleLaserFire, dispatchMove, togglePaused) => {
 
+    // context
+    const { paused } = useContext(PausedContext);
+
+    // local state
     const [connected, setConnected] = useState(false);
 
     const connectHandler = gamepadIndex => {
@@ -17,11 +22,15 @@ const useGamepad = (handleLaserFire, dispatchMove) => {
       };
     
     const handleMoveUp = () => {
-      return dispatchMove && dispatchMove('NORTH');
+      return dispatchMove && !paused && dispatchMove('NORTH');
     };
 
     const handleMoveDown = () => {
-      return dispatchMove && dispatchMove('SOUTH');
+      return dispatchMove && !paused && dispatchMove('SOUTH');
+    };
+
+    const handlePaused = () => {
+      return togglePaused && togglePaused();
     };
     
     const buttonDownHandler = buttonName => {
@@ -60,7 +69,7 @@ const useGamepad = (handleLaserFire, dispatchMove) => {
                         onB={() => { }}
                         onX={() => { }}
                         onY={() => { }}
-                        onStart={() => { }}
+                        onStart={handlePaused}
                         onBack={() => { }}
                         onLT={() => { }}
                         onRT={handleLaserFire}

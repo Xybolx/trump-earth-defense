@@ -10,7 +10,7 @@ import flagPNG from '../../imgs/flag.png';
 const TitleImg = () => {
 
     const [imgSRC, setImgSRC] = useState({
-        src: trumpKissPNG,
+        src: surprisePNG,
         height: 180,
         width: 180
     });
@@ -18,8 +18,8 @@ const TitleImg = () => {
     useInterval(() => {
         setImgSRC({
             src: surprisePNG,
-            height: 150,
-            width: 150
+            height: 180,
+            width: 180
         });
     }, 2000);
 
@@ -65,12 +65,12 @@ const TitleImg = () => {
                 src={imgSRC.src}   
                 alt='' 
                 className='img-fluid'
-                height={imgSRC.height}
-                width={imgSRC.width}
                 style={{
                     position: 'relative',
                     top: '25%',
-                    mixBlendMode: 'lighten'
+                    mixBlendMode: 'lighten',
+                    height: imgSRC.height,
+                    width: imgSRC.width
                 }} 
             />
         </div>

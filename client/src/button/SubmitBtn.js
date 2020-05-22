@@ -20,6 +20,8 @@ const LinkBtn = props => {
             onMouseOut={handleMouseOut}
             id={props.id}
             className={props.className}
+            data-toggle={props.dataToggle}
+            data-target={props.dataTarget}
             type='submit'>
             <img style={{ maxHeight: 50 }} className='img-fluid' src={btnBackground} alt='' />
             {props.text}  

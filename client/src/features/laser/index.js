@@ -1,4 +1,4 @@
-import React, { forwardRef, useCallback } from 'react';
+import React, { forwardRef, useCallback, useContext, useEffect } from 'react';
 import { MAP_WIDTH, LASER_WIDTH } from '../../config/constants';
 import useEventListener from '../../hooks/useEventListener';
 import useInterval from '../../hooks/useInterval';
@@ -6,10 +6,17 @@ import useGamepad from '../../hooks/useGamepad';
 import laserMP3 from './laser.mp3';
 import specialMP3 from './special.mp3';
 import { dispatchMove } from '../player/movement';
+import PausedContext from '../../context/paused/PausedContext';
 
 const Laser = forwardRef((props, laser) => {
 
     const { charge, setCharge, special, setSpecial, setIsFlying, setVisibility, setPosition, isFlying, position, visibility, handleSpecialFire } = props;
+
+    const { paused, setPaused } = useContext(PausedContext);
+
+    const togglePaused = useCallback(() => {
+        setPaused(!paused);
+    }, [paused, setPaused]);
 
     // function handling laser fire
     const handleLaserFire = useCallback(() => {
@@ -19,7 +26,7 @@ const Laser = forwardRef((props, laser) => {
         const regularFire = charge === 3 && special < 5;
 
         switch (true) {
-            case specialFire:
+            case specialFire && !paused:
                 const specialSound = new Audio(specialMP3);
                 specialSound.play()
                     .then(() => setCharge(0))
@@ -27,7 +34,7 @@ const Laser = forwardRef((props, laser) => {
                     .then(() => setSpecial(0))
                     .catch(err => console.log(err));
                 break;
-            case regularFire:
+            case regularFire && !paused:
                 const laserSound = new Audio(laserMP3);
                 laserSound.volume = .75;
                 laserSound.play()
@@ -40,9 +47,9 @@ const Laser = forwardRef((props, laser) => {
                 break;
         }
         
-    }, [setCharge, setIsFlying, setVisibility, handleSpecialFire, special, setSpecial, charge]);
+    }, [setCharge, setIsFlying, setVisibility, handleSpecialFire, special, setSpecial, charge, paused]);
 
-    const { gamepad } = useGamepad(handleLaserFire, dispatchMove);
+    const { gamepad } = useGamepad(handleLaserFire, dispatchMove, togglePaused);
 
     const handleLaserReset = () => {
         setPosition(0);
@@ -52,17 +59,19 @@ const Laser = forwardRef((props, laser) => {
     
     // useCallback handler
     const handleKeyDown = useCallback(({ key }) => {
-        switch(key) {
-            case ' ':
+        switch(true) {
+            case key === ' ' && !paused:
                 return handleLaserFire();
-            case 'ArrowUp':
+            case key === 'ArrowUp' && !paused:
                 return dispatchMove && dispatchMove('NORTH');
-            case 'ArrowDown':
+            case key === 'ArrowDown' && !paused:
                 return dispatchMove && dispatchMove('SOUTH');
+            case key === 'p':
+                return togglePaused();
             default:
                 console.log(key);
         }
-    }, [handleLaserFire]);
+    }, [handleLaserFire, togglePaused, paused]);
 
     // useCallback handler
     const handleTouch = useCallback(() => {
@@ -93,6 +102,12 @@ const Laser = forwardRef((props, laser) => {
     useInterval(() => {
         setCharge(charge => charge + 1);
     }, charge < 3 ? 500 : null);
+
+    useEffect(() => {
+        if (paused) {
+            setIsFlying(false);
+        }
+    }, [paused, setIsFlying]);
 
     return (
             <div

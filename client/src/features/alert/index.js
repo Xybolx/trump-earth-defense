@@ -55,15 +55,14 @@ const Alert = props => {
             style={{
                 display: !alert.isOpen ? 'block' : 'none',
                 position: 'absolute',
-                margin: '20px',
                 height: 60,
                 width: 500,
                 left: 0
             }}>
             <div style={{ position: 'relative' }}>
                 <img className='alert-img' height='40px' width='40px' src={trumpSurprise} alt='' />
-                <span className='alert-body' style={{ position: 'absolute', top: '30%', fontSize: 13 }}>
-                    <pre className='text-white'>{alert.message || `"Grab 'em by the pussy."`}</pre>
+                <span className='alert-body' style={{ position: 'absolute', top: '30%', fontSize: 10 }}>
+                    <div className='alert-msg'>{alert.message || `"Grab 'em by the pussy."`}</div>
                 </span> 
             </div>
         </span>

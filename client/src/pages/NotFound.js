@@ -12,18 +12,19 @@ const NotFound = () => {
         <PageContainer>
             <Audio id='train' src={trainMP3} playbackRate={1} />
             <TitleImg />
+            {`${window.location.pathname} returned ERROR: 404`}
             <Title 
-                text='* 404 Page Not Found *' 
-                subText={`"It's China's fault this URL doesn't go anywhere..."`} 
+                text={`*URL Not Found*`} 
+                subText={`"It's China's fault ${window.location.pathname} is a dead link!"`} 
             />
             <div className='button-wrapper mt-5'>
                 <LinkBtn
-                    className='btn btn-link'
+                    className='btn btn-dark'
                     text='TITLE SCREEN'
                     to='/'
                 />
                 <LinkBtn
-                    className='btn btn-link'
+                    className='btn btn-dark'
                     text='START GAME'
                     to='/game'
                 />

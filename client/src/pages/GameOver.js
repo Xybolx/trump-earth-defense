@@ -1,21 +1,30 @@
-import React, { useEffect, useContext } from 'react';
+import React, { useEffect, useContext, useState, useRef } from 'react';
 import Title from '../features/title';
 import ModalBtn from '../button/ModalBtn';
 import LinkBtn from '../button/LinkBtn';
 import SubmitBtn from '../button/SubmitBtn';
 import ScoresModal from '../features/modal/ScoresModal';
 import fakeMP3 from '../features/modal/fake.mp3';
-import richMP3 from '../features/enemy/rich.mp3';
 import outMP3 from '../imgs/out.mp3';
-import TitleImg from '../features/titleImg';
+import GameOverImg from '../features/gameOverImg';
 import PageContainer from '../features/pageContainer/PageContainer';
 import useForm from '../hooks/useForm';
 import API from '../utils/API';
-import ScoresContext from '../context/score/ScoreContext';
+import ScoreContext from '../context/score/ScoreContext';
+import useTimeout from '../hooks/useTimeout';
+import AlertModal from '../features/modal/AlertModal';
 
 const GameOver = () => {
 
-    const { score } = useContext(ScoresContext);
+    const inputRef = useRef();
+
+    const [scores, setScores] = useState([]);
+
+    const [isOpen, setIsOpen] = useState(false);
+    
+    const [isSubmitted, setIsSubmitted] = useState(false);
+
+    const { score, setScore } = useContext(ScoreContext);
 
     const { values, handleChange, handleClearForm } = useForm({
         initials: ""
@@ -31,6 +40,8 @@ const GameOver = () => {
         }
         API.saveScore(data)
             .then(res => handleClearForm())
+            .then(() => setScore(0))
+            .then(() => setIsSubmitted(true))
             .catch(err => console.log(err));
     };
 
@@ -41,32 +52,42 @@ const GameOver = () => {
 
     useEffect(() => {
         const out = new Audio(outMP3);
-        const rich = new Audio(richMP3);
-        out.playbackRate = .55;
-        rich.playbackRate = .80;
-        out.play().then(() => {
-            return rich.play();
-        });
+        out.play();
+    }, []);
+
+    useEffect(() => {
+        API.getScores()
+            .then(res => setScores(res.data));
+    }, [scores]);
+
+    useTimeout(() => {
+        setIsOpen(true);
+    }, 15000);
+
+    useEffect(() => {
+       inputRef.current.focus();
     }, []);
 
     return (
         <PageContainer>
-            <TitleImg />
+            <GameOverImg />
             <Title 
                 text={`GAME OVER`} 
-                subText={`"I'M REALLY RICH!"`} 
+                pText='Good job jerk. Trump blew up the Earth!' 
             />
-            <form onSubmit={handleSubmit} className='col-md-6 offset-md-3 container'>
+            <form style={{ display: isSubmitted ? 'none' : 'block' }} onSubmit={handleSubmit} className='col-md-6 offset-md-3 container'>
                 <div className="form-group">
-                    <label htmlFor="initials">Enter Initials</label>
-                    <input className="form-control text-center" id="initials" name="initials" value={initials || ""} onChange={handleChange} required />
+                    <label style={{ color: 'yellow' }} htmlFor="initials">Enter Initials</label>
+                    <input ref={inputRef} className="form-control text-center" id="initials" name="initials" value={initials || ""} onChange={handleChange} required />
                 </div>
                 <SubmitBtn 
                     className='btn btn-dark'
-                    text='Submit'
+                    text='SUBMIT'
+                    dataToggle="modal" 
+                    dataTarget={ isSubmitted ? "#scoresModal" : ""}
                  />
             </form>
-            <div className='mt-5'>
+            <div style={{ display: !isSubmitted ? 'none' : 'block' }}>
                 <LinkBtn
                     className='btn btn-dark'
                     text='TITLE SCREEN'
@@ -80,7 +101,8 @@ const GameOver = () => {
                     dataTarget="#scoresModal"
                 />
             </div>
-            <ScoresModal />
+            <AlertModal isOpen={isOpen} playerScore={score} scores={scores} />
+            <ScoresModal scores={scores} setScores={setScores} />
         </PageContainer>
     );
 };

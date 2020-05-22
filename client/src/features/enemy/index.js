@@ -1,5 +1,6 @@
 import React, { useEffect, useCallback, useState, useRef, useContext } from 'react';
 import ScoreContext from '../../context/score/ScoreContext';
+import PausedContext from '../../context/paused/PausedContext';
 import { dispatchLife } from '../player/movement';
 import useInterval from '../../hooks/useInterval';
 import trumpSprite from './trump.png';
@@ -15,6 +16,7 @@ const Enemy = props => {
     const { setShield, setSpecial, specialFire, setSpecialFire, laser, isFlying, handleLaserReset, initialPositionX, initialPositionY, children, setAlert } = props;
 
     const { setScore } = useContext(ScoreContext);
+    const { paused } = useContext(PausedContext);
 
     const enemy = useRef();
 
@@ -115,7 +117,7 @@ const Enemy = props => {
             default:
                 console.log(destroyed);
         }
-    }, !destroyed ? tickInterval : null);
+    }, !destroyed && !paused ? tickInterval : null);
 
     return (
             <div

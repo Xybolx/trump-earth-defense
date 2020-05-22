@@ -1,8 +1,10 @@
 import React from 'react';
 import earthPNG from './earth.png';
-import splodeGIF from '../enemy/splode.gif';
 
 const Earth = props => {
+
+    const { shield, children } = props;
+
     return (
         <div
             className='earth'
@@ -12,15 +14,15 @@ const Earth = props => {
                 top: 200,
                 height: '350px',
                 width: '350px',
-                backgroundImage: !props.earthDestroyed ? `url('${earthPNG}')` : `url('${splodeGIF}')`,
+                backgroundImage: `url('${earthPNG}')`,
                 backgroundSize: 'contain',
                 backgroundRepeat: 'no-repeat',
                 borderRadius: '50%',
-                borderColor: props.shield >=10 ? 'lawngreen' : props.shield >= 5 ? 'yellow' : props.shield >= 1 ? 'red' : 'red',
+                borderColor: shield >=10 ? 'lawngreen' : shield >= 5 ? 'yellow' : shield >= 1 ? 'red' : 'red',
                 borderStyle: 'double',
                 borderWidth: 12
             }}>
-            {props.children}
+            { children }
         </div>
     );
 };

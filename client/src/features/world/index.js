@@ -10,6 +10,8 @@ import Enemy from '../enemy';
 import Laser from '../laser';
 import SpecialContainer from './SpecialContainer';
 import GameOverContext from '../../context/gameOver/GameOverContext';
+import PausedContext from '../../context/paused/PausedContext';
+import PausedAlert from '../pausedAlert/PausedAlert';
 
 const World = () => {
 
@@ -18,6 +20,7 @@ const World = () => {
 
   // context
   const { gameOver, setGameOver } = useContext(GameOverContext);
+  const { paused } = useContext(PausedContext);
 
   // local state
   const [isFlying, setIsFlying] = useState(false);
@@ -88,7 +91,11 @@ useEffect(() => {
             special={special}>
             {gamepadConnected}
             {gamepad}
-            <Alert alert={alert} setAlert={setAlert} />
+            {
+              !paused ? 
+              <Alert alert={alert} setAlert={setAlert} /> : 
+              <PausedAlert paused={paused} />
+            }
           </Progress>
           <Player>
               <Laser 

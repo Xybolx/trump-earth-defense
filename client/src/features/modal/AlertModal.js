@@ -1,24 +1,26 @@
 import React from 'react';
 import ModalBtn from '../../button/ModalBtn';
 
-const ScoresModal = ({ scores }) => {
+const AlertModal = ({ playerScore, scores }) => {
 
-    const mappedScores = scores && scores.map((score, index) => (
-        <tr className='text-light' key={score._id}>
-            <th className='text-danger' scope="row">{index + 2}</th>
-            <td>{score.initials}</td>
-            <td className='text-info'>{score.score}</td>
+    const filteredScores = scores && scores.filter(score => (score < playerScore));
+
+    const mappedScores = filteredScores.map((score, index) => (
+        <tr key={score._id}>
+            <th className='text-light' scope="row">{index + 1}</th>
+            <td className='text-light'>{score.initials}</td>
+            <td className='text-light'>{score.score}</td>
         </tr>
     ));
 
     return (
-        <div className="modal fade" id="scoresModal" tabIndex="-1" role="dialog" aria-labelledby="scoresModalCenterTitle" aria-hidden="true">
+        <div className="modal fade" id="alertModal" tabIndex="-1" role="dialog" aria-labelledby="alertModalCenterTitle" aria-hidden="true">
             <div className="modal-dialog modal-dialog-centered" role="document">
                 <div className="modal-content">
                     <div className="modal-header">
-                        <h5 className="modal-title" id="scoresModalCenterTitle">Fake High Scores</h5>
+                        <h5 className="modal-title" id="alertModalCenterTitle">Fake High Scores</h5>
                         <button type="button" className="close text-warning" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
+                            <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
                     <div className="modal-body">
@@ -28,11 +30,6 @@ const ScoresModal = ({ scores }) => {
                                     <th className="score-table-head">#</th>
                                     <th className="score-table-head">Initials</th>
                                     <th className="score-table-head">Score</th>
-                                </tr>
-                                <tr className='text-light'>
-                                    <th className='text-danger' scope="row">1</th>
-                                    <td>DJT</td>
-                                    <td><i className="fas fa-infinity text-info" /></td>
                                 </tr>
                             </thead>
                             <tbody>
@@ -45,7 +42,7 @@ const ScoresModal = ({ scores }) => {
                             className="btn btn-dark"
                             text="Close" 
                             dataToggle="modal" 
-                            dataTarget="#scoresModal"
+                            dataTarget="#alertModal"
                         />
                     </div>
                 </div>
@@ -54,4 +51,4 @@ const ScoresModal = ({ scores }) => {
     );
 };
 
-export default ScoresModal;
+export default AlertModal;

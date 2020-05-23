@@ -21,15 +21,15 @@ const useGamepad = (handleLaserFire, dispatchMove, togglePaused) => {
         console.log(`Gamepad ${gamepadIndex + 1} disconnected !`);
       };
     
-    const handleMoveUp = () => {
+    const moveUpHandler = () => {
       return dispatchMove && !paused && dispatchMove('NORTH');
     };
 
-    const handleMoveDown = () => {
+    const moveDownHandler = () => {
       return dispatchMove && !paused && dispatchMove('SOUTH');
     };
 
-    const handlePaused = () => {
+    const pausedHandler = () => {
       return togglePaused && togglePaused();
     };
     
@@ -69,7 +69,7 @@ const useGamepad = (handleLaserFire, dispatchMove, togglePaused) => {
                         onB={() => { }}
                         onX={() => { }}
                         onY={() => { }}
-                        onStart={handlePaused}
+                        onStart={pausedHandler}
                         onBack={() => { }}
                         onLT={() => { }}
                         onRT={handleLaserFire}
@@ -77,8 +77,8 @@ const useGamepad = (handleLaserFire, dispatchMove, togglePaused) => {
                         onRB={() => { }}
                         onLS={() => { }}
                         onRS={() => { }}
-                        onUp={handleMoveUp}
-                        onDown={handleMoveDown}
+                        onUp={moveUpHandler}
+                        onDown={moveDownHandler}
                         onLeft={() => { }}
                         onRight={() => { }}>
                     </Gamepad>

@@ -1,5 +1,6 @@
 import Game from './Game';
 import Home from './Home';
+import Instructions from './Instructions';
 import NotFound from './NotFound';
 
 const routes = [
@@ -9,9 +10,16 @@ const routes = [
         exact: true,
         component: Home
     },
-    
+
     {
         id: 2,
+        path: '/instructions',
+        exact: true,
+        component: Instructions
+    },
+    
+    {
+        id: 3,
         path: '/game',
         exact: true,
         component: Game

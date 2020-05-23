@@ -44,7 +44,7 @@ const Home = () => {
                 <LinkBtn
                     className='btn btn-dark'
                     text='START GAME'
-                    to='/game'
+                    to='/instructions'
                     />
                 <ModalBtn
                     className='btn btn-dark'

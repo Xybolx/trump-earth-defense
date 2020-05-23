@@ -5,6 +5,7 @@ import quietMP3 from './quiet.mp3';
 import rocketMP3 from './rocket.mp3';
 import wallMP3 from './wall.mp3';
 import trumpSurprise from '../enemy/surprise.png';
+import trumpTalkGIF from './trump-talk.gif';
 
 const Alert = props => {
 
@@ -60,7 +61,7 @@ const Alert = props => {
                 left: 0
             }}>
             <div style={{ position: 'relative' }}>
-                <img className='alert-img' height='40px' width='40px' src={trumpSurprise} alt='' />
+                <img className='alert-img' height='75px' width='75px' src={trumpTalkGIF} alt='' />
                 <span className='alert-body' style={{ position: 'absolute', top: '30%', fontSize: 10 }}>
                     <div className='alert-msg'>{alert.message || `"Grab 'em by the pussy."`}</div>
                 </span> 

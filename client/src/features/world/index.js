@@ -89,7 +89,6 @@ useEffect(() => {
             shield={shield} 
             charge={charge} 
             special={special}>
-            {gamepadConnected}
             {gamepad}
             {
               !paused ? 
@@ -97,6 +96,7 @@ useEffect(() => {
               <PausedAlert paused={paused} />
             }
           </Progress>
+          {gamepadConnected}
           <Player>
               <Laser 
                 ref={laser}

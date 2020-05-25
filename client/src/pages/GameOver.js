@@ -5,7 +5,7 @@ import LinkBtn from '../button/LinkBtn';
 import SubmitBtn from '../button/SubmitBtn';
 import ScoresModal from '../features/modal/ScoresModal';
 import fakeMP3 from '../features/modal/fake.mp3';
-import outMP3 from '../imgs/out.mp3';
+import trainMP3 from '../imgs/train.mp3';
 import GameOverImg from '../features/gameOverImg';
 import PageContainer from '../features/pageContainer/PageContainer';
 import useForm from '../hooks/useForm';
@@ -57,8 +57,8 @@ const GameOver = () => {
     };
 
     useEffect(() => {
-        const out = new Audio(outMP3);
-        out.play();
+        const train = new Audio(trainMP3);
+        train.play();
     }, []);
 
     useEffect(() => {

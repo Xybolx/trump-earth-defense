@@ -11,8 +11,8 @@ return (
         <Router>
             <Switch>
                 <Route exact path='/' component={Home} />
-                <Route path='/instructions' component={Instructions} />
-                <Route path='/game' component={Game} />
+                <Route exact path='/instructions' component={Instructions} />
+                <Route exact path='/game' component={Game} />
                 <Route path='' component={NotFound} />
             </Switch>
         </Router>

@@ -143,18 +143,25 @@ tr {
 
 .modal-footer {
   background:rgba(0, 0, 0, 0.219);
+  border-top: unset;
 }
 
 .modal-content {
-  background: url('./imgs/news.jpg'), rgba(0, 0, 0, 0.61);
+  background: url('./imgs/news.jpg'), rgba(0, 0, 0, 0.719);
   background-blend-mode: color-burn;
   background-size: contain;
-  background-repeat: repeat-y;
+  background-repeat: no-repeat;
+  background-attachment: scroll;
+  background-position-y: center;
 }
 
 .modal-body {
   max-height: 450px;
   overflow: scroll;
+}
+
+.modal-header {
+  border-bottom: unset;
 }
 
 .btn-link:hover {
@@ -206,6 +213,10 @@ progress {
 #initials {
   background: transparent;
   color: yellow;
+}
+
+.initials-data {
+  text-transform: uppercase;
 }
 
 .score-table-head {

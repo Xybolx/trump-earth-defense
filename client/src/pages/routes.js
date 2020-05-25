@@ -1,36 +1,23 @@
+import React from 'react';
 import Game from './Game';
 import Home from './Home';
 import Instructions from './Instructions';
 import NotFound from './NotFound';
+import{ BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
-const routes = [
-    {
-        id: 1,
-        path: '/',
-        exact: true,
-        component: Home
-    },
+const Routes = () => {
 
-    {
-        id: 2,
-        path: '/instructions',
-        exact: true,
-        component: Instructions
-    },
-    
-    {
-        id: 3,
-        path: '/game',
-        exact: true,
-        component: Game
-    },
+return (
+        <Router>
+            <Switch>
+                <Route exact path='/' component={Home} />
+                <Route path='/instructions' component={Instructions} />
+                <Route path='/game' component={Game} />
+                <Route path='' component={NotFound} />
+            </Switch>
+        </Router>
+    );
 
-    {
-        id: 3,
-        path: '',
-        exact: false,
-        component: NotFound
-    }
-];
+}
 
-export default routes;
+export default Routes;

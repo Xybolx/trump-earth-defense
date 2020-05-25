@@ -13,6 +13,7 @@ import API from '../utils/API';
 import ScoreContext from '../context/score/ScoreContext';
 import useTimeout from '../hooks/useTimeout';
 import AlertModal from '../features/modal/AlertModal';
+import useValidate from '../hooks/useValidate';
 
 const GameOver = () => {
 
@@ -32,6 +33,10 @@ const GameOver = () => {
 
     const { initials } = values;
 
+    const [errors, resetValidate] = useValidate(initials);
+
+    const { isValidInitials } = errors;
+
     const handleSubmit = ev => {
         ev.preventDefault();
         const data = {
@@ -41,6 +46,7 @@ const GameOver = () => {
         API.saveScore(data)
             .then(res => handleClearForm())
             .then(() => setScore(0))
+            .then(() => resetValidate())
             .then(() => setIsSubmitted(true))
             .catch(err => console.log(err));
     };
@@ -77,14 +83,44 @@ const GameOver = () => {
             />
             <form style={{ display: isSubmitted ? 'none' : 'block' }} onSubmit={handleSubmit} className='col-md-6 offset-md-3 container'>
                 <div className="form-group">
-                    <label style={{ color: 'yellow' }} htmlFor="initials">Enter Initials</label>
-                    <input ref={inputRef} className="form-control text-center" id="initials" name="initials" value={initials || ""} onChange={handleChange} required />
+                    <label 
+                        className='small' 
+                        style={{ color: 'yellow' }}
+                        htmlFor="initials">
+                        Enter Initials
+                    </label>
+                    <div
+                        className='small' 
+                        style={
+                        initials && !isValidInitials ? 
+                        { display: "block", color: "tomato" } :
+                        { display: "none" }}>
+                        Must be at least 2/no more than 3 characters!
+                    </div>
+                    <div 
+                        className='small'
+                        style={
+                        initials && isValidInitials ? 
+                        { visibility: "visible", color: "lawngreen" } : 
+                        { visibility: "hidden", }}>
+                        Valid initials!
+                    </div>
+                    <input 
+                        ref={inputRef} 
+                        className="form-control text-center" 
+                        id="initials" 
+                        name="initials" 
+                        value={initials || ""} 
+                        onChange={handleChange} 
+                        required 
+                        maxLength={3} 
+                        minLength={2} />
                 </div>
                 <SubmitBtn 
                     className='btn btn-dark'
                     text='SUBMIT'
                     dataToggle="modal" 
-                    dataTarget={ isSubmitted ? "#scoresModal" : ""}
+                    dataTarget={ !isSubmitted ? "#scoresModal" : ""}
                  />
             </form>
             <div style={{ display: !isSubmitted ? 'none' : 'block' }}>

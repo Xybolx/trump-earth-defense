@@ -6,7 +6,7 @@ const ScoresModal = ({ scores }) => {
     const mappedScores = scores && scores.map((score, index) => (
         <tr className='text-light' key={score._id}>
             <th className='text-danger' scope="row">{index + 2}</th>
-            <td>{score.initials}</td>
+            <td className='initials-data'>{score.initials}</td>
             <td className='text-info'>{score.score}</td>
         </tr>
     ));
@@ -25,9 +25,9 @@ const ScoresModal = ({ scores }) => {
                         <table className="table table-borderless">
                             <thead className="th-row">
                                 <tr>
-                                    <th className="score-table-head">#</th>
-                                    <th className="score-table-head">Initials</th>
-                                    <th className="score-table-head">Score</th>
+                                    <th className="score-table-head">RANK</th>
+                                    <th className="score-table-head">INITIALS</th>
+                                    <th className="score-table-head">SCORE</th>
                                 </tr>
                                 <tr className='text-light'>
                                     <th className='text-danger' scope="row">1</th>

@@ -4,8 +4,8 @@ const Schema = mongoose.Schema;
 const scoresSchema = new Schema({
     initials: {
         type: String,
-        maxlength: [3, "Initials must be 3 characters"],
-        minlength: [3, "Initials must be 3 characters"]
+        maxlength: [3, "Initials must be no more than 3 characters"],
+        minlength: [2, "Initials must be at least 2 characters"]
     },
 
     score: {

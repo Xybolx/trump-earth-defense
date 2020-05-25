@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
 import arcadePNG from './arcade-button.png';
 import pressedPNG from './arcade-pressed.png';
-import { Link } from 'react-router-dom';
 
-const LinkBtn = props => {
+const StartBtn = props => {
 
     const [btnBackground, setBtnBackground] = useState(arcadePNG);
 
@@ -16,17 +15,15 @@ const LinkBtn = props => {
     };
 
     return (
-        <Link
-            onMouseOver={handleMouseOver} 
-            onMouseOut={handleMouseOut}
+        <button
+            onMouseOver={handleMouseOver} onMouseOut={handleMouseOut}
             id={props.id}
-            className={props.className}  
-            exact='true'
-            to={props.to}>
+            className={props.className}
+            onClick={props.onClick}>
             <img style={{ maxHeight: 50 }} className='img-fluid' src={btnBackground} alt='' />
             {props.text}  
-        </Link>
+        </button>
     );
 };
 
-export default LinkBtn;
+export default StartBtn;

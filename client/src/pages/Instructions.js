@@ -1,12 +1,12 @@
-import React, { useState, useRef, useContext } from 'react';
+import React, { useState, useRef, useContext, useEffect } from 'react';
 import { MAP_HEIGHT, MAP_WIDTH } from '../config/constants';
+import whateverMP3 from '../imgs/whatever.mp3';
 import useGamepad from '../hooks/useGamepad';
 import CenteredColumn from '../features/centeredColumn';
 import Player from '../features/player';
 import Map from '../features/map';
 import Earth from '../features/earth';
 import Progress from '../features/progress';
-import Alert from '../features/alert';
 import Laser from '../features/laser';
 import PausedContext from '../context/paused/PausedContext';
 import PausedAlert from '../features/pausedAlert/PausedAlert';
@@ -27,20 +27,18 @@ const Instructions = () => {
 
   const [position, setPosition] = useState(0);
 
-  const [shield, setShield] = useState(10);
+  const [shield] = useState(10);
 
   const [charge, setCharge] = useState(3);
 
   const [special, setSpecial] = useState(0);
 
-  const [destroyedEarth, setDestroyedEarth] = useState(false);
-
   const laser = useRef();
 
-  const [alert, setAlert] = useState({
-    isOpen: false,
-    message: "",
-  });
+  useEffect(() => {
+    const whatever = new Audio(whateverMP3);
+    whatever.play();
+}, []);
 
   return (
     <div 
@@ -105,11 +103,15 @@ const Instructions = () => {
               </li>
               <br />
               <li className='small'>
-                Enemies get faster with each spawn! 
+                Use the P key or Start on controller to pause game
               </li>
               <br />
               <li className='small'>
                 When ten enemies cross the Earth's boundaries it will be destroyed by Trump's forces... 
+              </li>
+              <br />
+              <li className='small'>
+                You can practice moving your ship and firing here...
               </li>
               <LinkBtn
                 className='btn btn-dark'
@@ -118,7 +120,7 @@ const Instructions = () => {
               />
             </ol>
           </CenteredColumn>
-            <Earth destroyedEarth={destroyedEarth} shield={shield} />
+            <Earth />
         </Map>
     </div>
   );

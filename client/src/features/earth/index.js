@@ -3,7 +3,7 @@ import earthPNG from './earth.png';
 
 const Earth = props => {
 
-    const { shield, children } = props;
+    const { shield } = props;
 
     return (
         <div
@@ -18,11 +18,10 @@ const Earth = props => {
                 backgroundSize: 'contain',
                 backgroundRepeat: 'no-repeat',
                 borderRadius: '50%',
-                borderColor: shield >=10 ? 'lawngreen' : shield >= 5 ? 'yellow' : shield >= 1 ? 'red' : 'red',
+                borderColor: shield >= 10 ? 'lawngreen' : shield >= 5 ? 'yellow' : shield >= 1 ? 'red' : 'red',
                 borderStyle: 'double',
                 borderWidth: 12
             }}>
-            { children }
         </div>
     );
 };

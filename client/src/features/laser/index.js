@@ -115,14 +115,16 @@ const Laser = forwardRef((props, laser) => {
                 className='laser'
                 ref={laser}
                 style={{
+                    zIndex: 0,
                     position: 'relative',
                     left: position,
-                    top: 73,
+                    top: 70,
                     visibility: visibility,
-                    background: 'repeating-linear-gradient(tomato, whitesmoke, tomato)',
-                    borderRadius: '20%',
-                    height: 5,
+                    background: 'repeating-linear-gradient(red, tomato, whitesmoke, tomato, red)',
+                    borderRadius: '10%',
+                    height: 10,
                     width: 50,
+                    border: '1px dotted yellow'
                 }}>
                 {gamepad}
         </div>

@@ -3,7 +3,7 @@ import Gamepad from '../features/gamepad/Gamepad';
 import GamepadConnected from '../features/gamepad/GamepadConnected';
 import PausedContext from '../context/paused/PausedContext';
 
-const useGamepad = (handleLaserFire, dispatchMove, togglePaused) => {
+const useGamepad = (handleLaserFire, dispatchMove, togglePaused, pressStart) => {
 
     // context
     const { paused } = useContext(PausedContext);
@@ -69,8 +69,8 @@ const useGamepad = (handleLaserFire, dispatchMove, togglePaused) => {
                         onB={() => { }}
                         onX={() => { }}
                         onY={() => { }}
-                        onStart={pausedHandler}
-                        onBack={() => { }}
+                        onStart={pressStart}
+                        onBack={pausedHandler}
                         onLT={() => { }}
                         onRT={handleLaserFire}
                         onLB={() => { }}

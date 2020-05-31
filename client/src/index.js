@@ -7,16 +7,19 @@ import ScoreProvider from './context/score/ScoreProvider';
 import PausedProvider from './context/paused/PausedProvider';
 import { Provider } from 'react-redux';
 import store from './config/store';
+import ScoresProvider from './context/scores/ScoresProvider';
 
 ReactDOM.render(
-  <PausedProvider>
-    <ScoreProvider>
-      <GameOverProvider>
-        <Provider store={store}>
-          <App />
-        </Provider>
-      </GameOverProvider>
-    </ScoreProvider>
-  </PausedProvider>,
+  <ScoresProvider>
+    <PausedProvider>
+      <ScoreProvider>
+        <GameOverProvider>
+          <Provider store={store}>
+            <App />
+          </Provider>
+        </GameOverProvider>
+      </ScoreProvider>
+    </PausedProvider>
+  </ScoresProvider>,
   document.getElementById('root')
 );

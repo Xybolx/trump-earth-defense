@@ -77,7 +77,7 @@ const Instructions = () => {
               />
             </Player>
           <CenteredColumn>
-            <ol>
+            <ul>
               <li className='small'>
                 Earth is destroyed when this <span style={{ color: 'yellow' }} data-fa-transform="up-2" className='fas fa-globe-americas' /> is 0%
               </li>
@@ -118,9 +118,9 @@ const Instructions = () => {
                 text='START GAME'
                 to='/game'
               />
-            </ol>
+            </ul>
           </CenteredColumn>
-            <Earth />
+          <Earth />
         </Map>
     </div>
   );

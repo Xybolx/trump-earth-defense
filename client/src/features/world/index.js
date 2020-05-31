@@ -1,5 +1,4 @@
 import React, { useState, useRef, useContext, useEffect } from 'react';
-import { MAP_HEIGHT, MAP_WIDTH } from '../../config/constants';
 import useGamepad from '../../hooks/useGamepad';
 import Player from '../player';
 import Map from '../map';
@@ -12,6 +11,7 @@ import SpecialContainer from './SpecialContainer';
 import GameOverContext from '../../context/gameOver/GameOverContext';
 import PausedContext from '../../context/paused/PausedContext';
 import PausedAlert from '../pausedAlert/PausedAlert';
+import { MAP_WIDTH, MAP_HEIGHT } from '../../config/constants';
 
 const World = () => {
 
@@ -19,7 +19,7 @@ const World = () => {
   const { gamepad, gamepadConnected } = useGamepad();
 
   // context
-  const { gameOver, setGameOver } = useContext(GameOverContext);
+  const { setGameOver } = useContext(GameOverContext);
   const { paused } = useContext(PausedContext);
 
   // local state
@@ -36,8 +36,6 @@ const World = () => {
   const [special, setSpecial] = useState(0);
 
   const [specialFire, setSpecialFire] = useState(false);
-
-  const [destroyedEarth, setDestroyedEarth] = useState(false);
 
   const laser = useRef();
 
@@ -62,28 +60,15 @@ const World = () => {
 useEffect(() => {
   switch (true) {
     case shield === 0:
-      setDestroyedEarth(true);
+      setGameOver(true);
       break;
     default: 
       break;
   }
-}, [setGameOver, shield, gameOver, destroyedEarth]);
-
-useEffect(() => {
-  if (destroyedEarth) {
-    const timer = setTimeout(setGameOver(true), 3500);
-    return () => clearTimeout(timer);
-  }
-}, [setGameOver, destroyedEarth]);
+}, [setGameOver, shield]);
 
   return (
-    <div 
-      style={{
-        position: 'relative',
-        width: MAP_WIDTH,
-        height: MAP_HEIGHT,
-        margin: '10px 20px auto',
-      }}>
+    <div style={{ height: MAP_HEIGHT, width: MAP_WIDTH }} className='world'>
         <Map>
           <Progress 
             shield={shield} 
@@ -117,7 +102,7 @@ useEffect(() => {
             <Enemy laser={laser} alert={alert} setAlert={setAlert} initialPositionX={1300} initialPositionY={-100} specialFire={specialFire} setSpecialFire={setSpecialFire} isFlying={isFlying} handleLaserReset={handleLaserReset} setShield={setShield} setSpecial={setSpecial} />
             <Enemy laser={laser} alert={alert} setAlert={setAlert} initialPositionX={1300} initialPositionY={0} specialFire={specialFire} setSpecialFire={setSpecialFire} isFlying={isFlying} handleLaserReset={handleLaserReset} setShield={setShield} setSpecial={setSpecial} />
             <Enemy laser={laser} alert={alert} setAlert={setAlert} initialPositionX={1300} initialPositionY={100} specialFire={specialFire} setSpecialFire={setSpecialFire} isFlying={isFlying} handleLaserReset={handleLaserReset} setShield={setShield} setSpecial={setSpecial} />
-            <Earth destroyedEarth={destroyedEarth} shield={shield} />
+            <Earth shield={shield} />
         </Map>
     </div>
   );

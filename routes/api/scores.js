@@ -11,7 +11,7 @@ router
 // Matches with "/api/scores/:id"
 router
     .route("/:id")
-    .get(scoresController.findById)
+    .get(scoresController.findByDate)
     .put(scoresController.update);
 
 module.exports = router;

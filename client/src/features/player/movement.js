@@ -9,9 +9,9 @@ function getNewPosition(direction) {
     const oldPos = store.getState().player.position;
     switch (direction) {
         case 'NORTH':
-            return oldPos - SPRITE_SIZE / 2;
+            return oldPos - MAP_HEIGHT / 10;
         case 'SOUTH':
-            return oldPos + SPRITE_SIZE / 2;
+            return oldPos + MAP_HEIGHT / 10;
         default:
             console.log(direction);
     }

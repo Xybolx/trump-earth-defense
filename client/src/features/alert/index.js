@@ -57,12 +57,12 @@ const Alert = props => {
                 position: 'absolute',
                 height: 60,
                 width: 500,
-                left: 0
+                zIndex: 3
             }}>
             <div style={{ position: 'relative' }}>
-                <img className='alert-img' height='75px' width='75px' src={trumpTalkGIF} alt='' />
-                <span className='alert-body' style={{ position: 'absolute', top: '30%', fontSize: 10 }}>
-                    <div className='alert-msg'>{alert.message || `"I can do whatever the hell I want!"`}</div>
+                <span className='alert-body' style={{ position: 'absolute', fontSize: 10, textTransform: 'uppercase' }}>
+                    <img className='alert-img' height='60px' width='60px' src={trumpTalkGIF} alt='' />
+                    <span className='alert-msg'>{alert.message || `"I can do whatever the hell I want!"`}</span>
                 </span> 
             </div>
         </span>

@@ -1,7 +1,25 @@
-import React from 'react';
+import React, { useEffect, useContext } from 'react';
+import useAPI from '../../hooks/useAPI';
+import ScoresContext from '../../context/scores/ScoresContext';
 import ModalBtn from '../../button/ModalBtn';
 
-const ScoresModal = ({ scores }) => {
+const ScoresModal = props => {
+
+    const { lastScore } = props;
+
+    const { scores } = useContext(ScoresContext);
+
+    const { getScores } = useAPI();
+
+    // const getScores = useCallback(() => {
+    //     API.getScores()
+    //         .then(res => setScores(res.data))
+    //         .catch(err => console.log(err));
+    // }, [setScores]);
+
+    useEffect(() => {
+        getScores();
+    }, [getScores]);
 
     const mappedScores = scores && scores.map((score, index) => (
         <tr className='text-light' key={score._id}>
@@ -11,12 +29,20 @@ const ScoresModal = ({ scores }) => {
         </tr>
     ));
 
+    // const filteredScores = scores && scores.filter(score => (
+    //     score >= lastScore.score
+    // ));
+
+    // useEffect(() => {
+    //     setRankList(filteredScores);
+    // }, []);
+
     return (
         <div className="modal fade" id="scoresModal" tabIndex="-1" role="dialog" aria-labelledby="scoresModalCenterTitle" aria-hidden="true">
             <div className="modal-dialog modal-dialog-centered" role="document">
                 <div className="modal-content">
-                    <div className="modal-header">
-                        <h5 className="modal-title" id="scoresModalCenterTitle">Fake High Scores</h5>
+                    <div className="modal-header text-center">
+                        <h5 className="modal-title" id="scoresModalCenterTitle">{lastScore && lastScore ? `${lastScore.initials} ${lastScore.score} ` : 'Fake High Scores'}</h5>
                         <button type="button" className="close text-warning" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                         </button>

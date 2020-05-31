@@ -1,9 +1,9 @@
 import React from 'react';
 import ModalBtn from '../../button/ModalBtn';
 
-const AlertModal = ({ playerScore, scores }) => {
+const AlertModal = ({ playerScore, scores, isOpen }) => {
 
-    const filteredScores = scores && scores.filter(score => (score < playerScore));
+    const filteredScores = scores && scores.filter(score => (score > playerScore));
 
     const mappedScores = filteredScores.map((score, index) => (
         <tr key={score._id}>
@@ -14,7 +14,7 @@ const AlertModal = ({ playerScore, scores }) => {
     ));
 
     return (
-        <div className="modal fade" id="alertModal" tabIndex="-1" role="dialog" aria-labelledby="alertModalCenterTitle" aria-hidden="true">
+        <div style={{ display: isOpen ? 'block' : 'none' }} className="modal fade" id="alertModal" tabIndex="-1" role="dialog" aria-labelledby="alertModalCenterTitle" aria-hidden="true">
             <div className="modal-dialog modal-dialog-centered" role="document">
                 <div className="modal-content">
                     <div className="modal-header">

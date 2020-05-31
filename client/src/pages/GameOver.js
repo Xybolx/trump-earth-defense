@@ -9,27 +9,21 @@ import trainMP3 from '../imgs/train.mp3';
 import GameOverImg from '../features/gameOverImg';
 import PageContainer from '../features/pageContainer/PageContainer';
 import useForm from '../hooks/useForm';
-import API from '../utils/API';
+import useAPI from '../hooks/useAPI';
 import ScoreContext from '../context/score/ScoreContext';
-import useTimeout from '../hooks/useTimeout';
-import AlertModal from '../features/modal/AlertModal';
 import useValidate from '../hooks/useValidate';
 
 const GameOver = () => {
 
     const inputRef = useRef();
 
-    const [scores, setScores] = useState([]);
-
-    const [isOpen, setIsOpen] = useState(false);
+    const [lastScore, setLastScore] = useState({});
     
     const [isSubmitted, setIsSubmitted] = useState(false);
 
     const { score, setScore } = useContext(ScoreContext);
 
-    const { values, handleChange, handleClearForm } = useForm({
-        initials: ""
-    });
+    const { values, handleChange, handleClearForm } = useForm();
 
     const { initials } = values;
 
@@ -37,18 +31,23 @@ const GameOver = () => {
 
     const { isValidInitials } = errors;
 
+    const postScoreSave = () => {
+        handleClearForm();
+        setScore(0);
+        resetValidate();
+        setIsSubmitted(true);
+    };
+
+    const { saveScore } = useAPI(postScoreSave);
+
     const handleSubmit = ev => {
         ev.preventDefault();
-        const data = {
+        const scoreData = {
             score: score,
             initials: initials
         }
-        API.saveScore(data)
-            .then(res => handleClearForm())
-            .then(() => setScore(0))
-            .then(() => resetValidate())
-            .then(() => setIsSubmitted(true))
-            .catch(err => console.log(err));
+        setLastScore(scoreData);
+        saveScore(scoreData);
     };
 
     const playFakeMP3 = () => {
@@ -57,18 +56,9 @@ const GameOver = () => {
     };
 
     useEffect(() => {
-        const train = new Audio(trainMP3);
+        const train = document.getElementById('train');
         train.play();
     }, []);
-
-    useEffect(() => {
-        API.getScores()
-            .then(res => setScores(res.data));
-    }, [scores]);
-
-    useTimeout(() => {
-        setIsOpen(true);
-    }, 15000);
 
     useEffect(() => {
        inputRef.current.focus();
@@ -76,6 +66,7 @@ const GameOver = () => {
 
     return (
         <PageContainer>
+            <audio id='train' src={trainMP3} />
             <GameOverImg />
             <Title 
                 text={`GAME OVER`} 
@@ -95,7 +86,7 @@ const GameOver = () => {
                         initials && !isValidInitials ? 
                         { display: "block", color: "tomato" } :
                         { display: "none" }}>
-                        Must be at least 2/no more than 3 characters!
+                        Must be 2-3 characters!
                     </div>
                     <div 
                         className='small'
@@ -137,8 +128,7 @@ const GameOver = () => {
                     dataTarget="#scoresModal"
                 />
             </div>
-            <AlertModal isOpen={isOpen} playerScore={score} scores={scores} />
-            <ScoresModal scores={scores} setScores={setScores} />
+            <ScoresModal lastScore={lastScore} />
         </PageContainer>
     );
 };

@@ -84,6 +84,7 @@ code {
 #root {
     color: whitesmoke;
     text-shadow: .5px .5px .5px tomato;
+    background: url('./features/map/stars.jpg');
 }
 
 .earth {
@@ -141,6 +142,10 @@ tr {
   color: yellow;
 }
 
+.modal {
+  box-shadow: .5px .5px .5px whitesmoke;
+}
+
 .modal-footer {
   background:rgba(0, 0, 0, 0.219);
   border-top: unset;
@@ -153,6 +158,9 @@ tr {
   background-repeat: no-repeat;
   background-attachment: scroll;
   background-position-y: center;
+  box-shadow: 1px 1px 1px 12px rgba(245, 245, 245, 0.432);
+  border: 2.5px double whitesmoke;
+  outline: 3px double slateblue;
 }
 
 .modal-body {
@@ -222,4 +230,8 @@ progress {
 .score-table-head {
   text-decoration-line: underline;
   text-decoration-color: tomato;
+}
+
+ul {
+  list-style: disc;
 }

@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import useInterval from '../../hooks/useInterval';
 import earthPNG from '../earth/earth.png';
 import splodeGIF from '../enemy/splode.gif';
 import splodeMP3 from '../enemy/splode.mp3';
@@ -16,23 +15,23 @@ const GameOverImg = () => {
         width: 400
     });
 
-    useInterval(() => {
+    useTimeout(() => {
         setImgSRC({
             src: splodeGIF,
             height: 400,
             width: 400
         });
-    }, 5000);
+    }, 6500);
 
     useTimeout(() => {
             setLoaded(true);
-    }, 5500);
+    }, 7000);
 
     useTimeout(() => {
         const splode = new Audio(splodeMP3);
         splode.playbackRate = 1;
         splode.play();
-    }, 5000);
+    }, 6500);
 
     return (
         <>

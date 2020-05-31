@@ -12,8 +12,8 @@ const Player = props => {
                 className='player'
                 style={{
                     position: 'relative',
-                    zIndex: 1,
-                    left: 20,
+                    zIndex: 3,
+                    // left: 5,
                     top: position,
                     height: '150px',
                     width: '150px',

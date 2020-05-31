@@ -16,6 +16,14 @@ module.exports = {
             .then(dbModel => res.json(dbModel))
             .catch(err => res.status(422).json(err));
     },
+    findByDate: function (req, res) {
+        db.Scores
+            .find(req.query)
+            .sort({ date: -1 })
+            .limit(1)
+            .then(dbModel => res.json(dbModel))
+            .catch(err => res.status(422).json(err));
+    },
     findOne: function (req, res) {
         db.Scores
             .findOne({ _id: req.params.id })

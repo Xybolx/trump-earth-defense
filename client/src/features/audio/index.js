@@ -11,7 +11,7 @@ const Audio = props => {
     }, [id, playbackRate]);
 
     return (
-        <audio id={id} src={src} loop />
+        <audio id={id} src={src} autoPlay loop />
     );
 };
 

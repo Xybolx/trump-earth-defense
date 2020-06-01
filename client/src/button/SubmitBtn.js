@@ -22,6 +22,7 @@ const LinkBtn = props => {
             className={props.className}
             data-toggle={props.dataToggle}
             data-target={props.dataTarget}
+            disabled={props.disabled}
             type='submit'>
             <img style={{ maxHeight: 50 }} className='img-fluid' src={btnBackground} alt='' />
             {props.text}  

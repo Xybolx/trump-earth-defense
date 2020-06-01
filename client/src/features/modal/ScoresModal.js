@@ -11,12 +11,6 @@ const ScoresModal = props => {
 
     const { getScores } = useAPI();
 
-    // const getScores = useCallback(() => {
-    //     API.getScores()
-    //         .then(res => setScores(res.data))
-    //         .catch(err => console.log(err));
-    // }, [setScores]);
-
     useEffect(() => {
         getScores();
     }, [getScores]);
@@ -28,14 +22,6 @@ const ScoresModal = props => {
             <td className='text-info'>{score.score}</td>
         </tr>
     ));
-
-    // const filteredScores = scores && scores.filter(score => (
-    //     score >= lastScore.score
-    // ));
-
-    // useEffect(() => {
-    //     setRankList(filteredScores);
-    // }, []);
 
     return (
         <div className="modal fade" id="scoresModal" tabIndex="-1" role="dialog" aria-labelledby="scoresModalCenterTitle" aria-hidden="true">

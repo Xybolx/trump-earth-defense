@@ -84,7 +84,7 @@ code {
 #root {
     color: whitesmoke;
     text-shadow: .5px .5px .5px tomato;
-    background: url('./features/map/stars.jpg');
+    /* background: url('./features/map/stars.jpg'); */
 }
 
 .earth {
@@ -170,6 +170,7 @@ tr {
 
 .modal-header {
   border-bottom: unset;
+  text-transform: uppercase;
 }
 
 .btn-link:hover {
@@ -234,4 +235,12 @@ progress {
 
 ul {
   list-style: disc;
+}
+
+.game-over-score {
+  animation: Flash infinite .45s;
+}
+
+.jumbotron {
+  background: transparent;
 }

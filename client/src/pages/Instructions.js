@@ -1,5 +1,4 @@
 import React, { useState, useRef, useContext, useEffect } from 'react';
-import { MAP_HEIGHT, MAP_WIDTH } from '../config/constants';
 import whateverMP3 from '../imgs/whatever.mp3';
 import useGamepad from '../hooks/useGamepad';
 import CenteredColumn from '../features/centeredColumn';
@@ -11,6 +10,7 @@ import Laser from '../features/laser';
 import PausedContext from '../context/paused/PausedContext';
 import PausedAlert from '../features/pausedAlert/PausedAlert';
 import LinkBtn from '../button/LinkBtn';
+import PageContainer from '../features/pageContainer/PageContainer';
 
 const Instructions = () => {
 
@@ -41,13 +41,7 @@ const Instructions = () => {
 }, []);
 
   return (
-    <div 
-      style={{
-        position: 'relative',
-        width: MAP_WIDTH,
-        height: MAP_HEIGHT,
-        margin: '10px 20px auto',
-      }}>
+    <PageContainer>
         <Map>
           <Progress 
             shield={shield} 
@@ -74,10 +68,10 @@ const Instructions = () => {
                 setPosition={setPosition}
                 special={special}
                 setSpecial={setSpecial}
-              />
+                />
             </Player>
           <CenteredColumn>
-            <ul>
+            <ul className='text-left'>
               <li className='small'>
                 Earth is destroyed when this <span style={{ color: 'yellow' }} data-fa-transform="up-2" className='fas fa-globe-americas' /> is 0%
               </li>
@@ -116,13 +110,12 @@ const Instructions = () => {
               <LinkBtn
                 className='btn btn-dark'
                 text='START GAME'
-                to='/game'
-              />
+                to='/game' />
             </ul>
           </CenteredColumn>
           <Earth />
         </Map>
-    </div>
+    </PageContainer>
   );
 };
 

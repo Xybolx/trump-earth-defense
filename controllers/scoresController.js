@@ -26,7 +26,7 @@ module.exports = {
     },
     findOne: function (req, res) {
         db.Scores
-            .findOne({ _id: req.params.id })
+            .findOne({ date: req.params.id })
             .then(dbModel => res.json(dbModel))
             .catch(err => res.status(422).json(err));
     },

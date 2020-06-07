@@ -1,5 +1,5 @@
 import React from 'react';
-import Audio from '../features/audio';
+import AudioFile from '../features/audioFile';
 import trainMP3 from '../imgs/train.mp3';
 import LinkBtn from '../button/LinkBtn';
 import Title from '../features/title';
@@ -10,7 +10,7 @@ const NotFound = () => {
 
     return (
         <PageContainer>
-            <Audio id='train' src={trainMP3} playbackRate={1} />
+            <AudioFile id='train' src={trainMP3} playbackRate={1} />
             <TitleImg />
             {`${window.location.pathname} returned ERROR: 404`}
             <Title 

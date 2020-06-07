@@ -10,7 +10,6 @@ const useForm = () => {
         ev.persist();
         const { name, value } = ev.target;
         setValues(values => ({ ...values, [name]: value }));
-        console.log(values);
     };
 
     // handle clear form

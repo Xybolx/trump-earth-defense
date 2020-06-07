@@ -3,11 +3,13 @@ import earthPNG from '../earth/earth.png';
 import splodeGIF from '../enemy/splode.gif';
 import splodeMP3 from '../enemy/splode.mp3';
 import TitleImg from '../titleImg';
+import Title from '../title';
+import trainMP3 from '../../imgs/train.mp3';
 import useTimeout from '../../hooks/useTimeout';
 
-const GameOverImg = () => {
+const GameOverImg = props => {
 
-    const [loaded, setLoaded] = useState(false);
+    const { loaded, setLoaded } = props;
 
     const [imgSRC, setImgSRC] = useState({
         src: earthPNG,
@@ -21,20 +23,24 @@ const GameOverImg = () => {
             height: 400,
             width: 400
         });
-    }, 6500);
+    }, 1000);
 
     useTimeout(() => {
-            setLoaded(true);
-    }, 7000);
+        const train = document.getElementById('train');
+        train.volume = .5;
+        train.play();
+        setLoaded(true);
+    }, 1500);
 
     useTimeout(() => {
         const splode = new Audio(splodeMP3);
-        splode.playbackRate = 1;
+        splode.playbackRate = .8;
         splode.play();
-    }, 6500);
+    }, 1000);
 
     return (
         <>
+            <audio id='train' src={trainMP3} />
             { !loaded ? 
             <div className='game-over-image'
                 style={{
@@ -49,8 +55,15 @@ const GameOverImg = () => {
                     backgroundPositionY: 'center',
                     backgroundPositionX: 'center',
                 }}>
-            </div> : <TitleImg />
-            }
+            </div> :
+            <div>
+
+                <TitleImg />
+                <Title 
+                    text={`GAME OVER`}
+                    pText='Good job jerk. Trump blew up the Earth!' 
+                    />
+            </div> }
         </>
     );
 };

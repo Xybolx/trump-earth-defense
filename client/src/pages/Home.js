@@ -10,15 +10,15 @@ import PageContainer from '../features/pageContainer/PageContainer';
 import TitleImg from '../features/titleImg';
 import StartBtn from '../button/StartBtn';
 import useAPI from '../hooks/useAPI';
+import AudioFile from '../features/audioFile';
 
 const Home = () => {
 
     const { getScores } = useAPI();
 
     const { setGameOver } = useContext(GameOverContext);
-
     
-    const [startPressed, setStartPressed] = useState(false);
+    const [isPlaying, setIsPlaying] = useState(false);
     
     useEffect(() => {
         getScores();
@@ -30,44 +30,35 @@ const Home = () => {
     };
     
     const pressStart = () => {
-        setStartPressed(true);
+       setIsPlaying(true);
     };
 
     useEffect(() => {
         setGameOver(false);
     }, [setGameOver]);
 
-    useEffect(() => {
-        if (startPressed) {
-        const hail = document.getElementById('hail');
-            hail.playbackRate = .30;
-            hail.volume = .80;
-            hail.play();
-        }
-    }, [startPressed]);
-
     return (
         <PageContainer>
-            <audio id='hail' src={hailMP3} loop />
+            <AudioFile id='hail' playbackRate={.3} src={hailMP3} isPlaying={isPlaying} />
             <TitleImg />
             <ScoresModal />
             <Title 
                 text='Trump Earth Defense' 
-                subText='Ready To Make Earth Great Again?' 
+                pText='Ready To Make Earth Great Again?' 
             />
-            <div style={{ display: !startPressed ? 'none' : 'block' }} className='button-wrapper mt-5'>
+            <div style={{ display: !isPlaying ? 'none' : 'block' }} className='button-wrapper mt-3'>
                     <LinkBtn
                         className='btn btn-dark'
                         text='START GAME'
-                        to='/instructions'/>
+                        to='/instructions' />
                     <ModalBtn
                         className='btn btn-dark'
                         text='HIGH SCORES'
                         onClick={playMP3}
                         dataToggle="modal" 
-                        dataTarget="#scoresModal"/>
+                        dataTarget="#scoresModal" />
             </div>
-            <div style={{ display: !startPressed ? 'block' : 'none' }}>
+            <div style={{ display: !isPlaying ? 'block' : 'none' }}>
                 <StartBtn
                     className='btn btn-dark'
                     text='START'

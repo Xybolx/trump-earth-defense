@@ -11,7 +11,7 @@ import SpecialContainer from './SpecialContainer';
 import GameOverContext from '../../context/gameOver/GameOverContext';
 import PausedContext from '../../context/paused/PausedContext';
 import PausedAlert from '../pausedAlert/PausedAlert';
-import { MAP_WIDTH, MAP_HEIGHT } from '../../config/constants';
+import PageContainer from '../pageContainer/PageContainer';
 
 const World = () => {
 
@@ -68,7 +68,7 @@ useEffect(() => {
 }, [setGameOver, shield]);
 
   return (
-    <div style={{ height: MAP_HEIGHT, width: MAP_WIDTH }} className='world'>
+    <PageContainer>
         <Map>
           <Progress 
             shield={shield} 
@@ -104,7 +104,7 @@ useEffect(() => {
             <Enemy laser={laser} alert={alert} setAlert={setAlert} initialPositionX={1300} initialPositionY={100} specialFire={specialFire} setSpecialFire={setSpecialFire} isFlying={isFlying} handleLaserReset={handleLaserReset} setShield={setShield} setSpecial={setSpecial} />
             <Earth shield={shield} />
         </Map>
-    </div>
+    </PageContainer>
   );
 };
 
